@@ -1,10 +1,9 @@
 local function close_neo_tree()
   require('neo-tree.sources.manager').close_all()
-  vim.notify 'closed all'
+  require('dapui').close()
 end
 
 local function open_neo_tree()
-  vim.notify 'opening neotree'
   require('neo-tree.sources.manager').show 'filesystem'
 end
 

@@ -10,6 +10,17 @@ return {
     local navic = require 'nvim-navic'
     require('lualine').setup {
       options = {
+        disabled_filetypes = {
+          winbar = {
+            'neo-tree',
+            'dapui_watches',
+            'dapui_breakpoints',
+            'dapui_scopes',
+            'dapui_console',
+            'dapui_stacks',
+            'dap-repl',
+          },
+        },
         offsets = {
           {
             filetype = 'NvimTree',

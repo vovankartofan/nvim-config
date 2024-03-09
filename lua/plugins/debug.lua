@@ -4,7 +4,7 @@ return {
     dependencies = {
       'williamboman/mason.nvim',
       'jay-babu/mason-nvim-dap.nvim',
-      'rcarriga/nvim-dap-ui',
+      { 'rcarriga/nvim-dap-ui', opts = {} },
       'theHamsta/nvim-dap-virtual-text',
     },
     config = function()
@@ -29,11 +29,12 @@ return {
         handlers = {},
       }
 
-      dapui.setup()
       dap.listeners.before.attach.dapui_config = function()
+        require('neo-tree.sources.manager').close_all()
         dapui.open()
       end
       dap.listeners.before.launch.dapui_config = function()
+        require('neo-tree.sources.manager').close_all()
         dapui.open()
       end
       dap.listeners.before.event_terminated.dapui_config = function()
@@ -44,12 +45,17 @@ return {
       end
 
       require('nvim-dap-virtual-text').setup {}
-      code.load_launchjs(nil, {
+      local launchJsConfig = {
         codelldb = { 'c', 'cpp' },
         cppdbg = { 'c', 'cpp' },
         cppvsdbg = { 'c', 'cpp' },
-      })
+      }
+      code.load_launchjs(nil, launchJsConfig)
       vim.keymap.set('n', '<F5>', function()
+        -- (Re-)reads launch.json if present
+        if vim.fn.filereadable '.vscode/launch.json' then
+          code.load_launchjs(nil, launchJsConfig)
+        end
         require('dap').continue()
       end)
       vim.keymap.set('n', '<F10>', function()

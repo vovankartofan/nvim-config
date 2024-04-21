@@ -12,16 +12,16 @@ return {
       opts = {},
       keys = {
         {
-          '<leader>ft',
+          '<leader>ts',
           function()
             require('telescope').extensions.asynctasks.all()
           end,
-          desc = 'Show all tasks.',
+          desc = '[S]how all tasks',
         },
       },
     },
   },
   config = function()
-    vim.api.nvim_set_keymap('n', '<leader>bb', ':AsyncTask build<CR>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('n', '<leader>tb', ':AsyncTask build<CR>', { desc = '[B]uild', noremap = true, silent = true })
   end,
 }

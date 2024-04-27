@@ -26,6 +26,8 @@ return {
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
 
+    require('mini.files').setup()
+
     -- Starter screen
     require('mini.starter').setup()
 
@@ -74,4 +76,13 @@ return {
     -- ... and there is more!
     --  Check out: https://github.com/echasnovski/mini.nvim
   end,
+  keys = {
+    {
+      '-',
+      function()
+        MiniFiles.open(vim.api.nvim_buf_get_name(0))
+      end,
+      desc = 'Open current dir',
+    },
+  },
 }

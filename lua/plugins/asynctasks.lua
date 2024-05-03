@@ -22,6 +22,9 @@ return {
     },
   },
   config = function()
+    vim.g.asynctasks_term_pos = 'bottom'
+    vim.g.asynctasks_config_name = '.nvim/tasks.ini'
+    vim.g.asynctasks_term_focus = false
     vim.api.nvim_set_keymap('n', '<leader>tb', ':AsyncTask build<CR>', { desc = '[B]uild', noremap = true, silent = true })
   end,
 }
